@@ -111,6 +111,14 @@ var KnownPackages = map[string]PackageOverride{
 		}
 		p.AddPackage(pkg) // get the rest of the types
 	},
+
+	"knative.dev/pkg/apis": func(p *Parser, pkg *loader.Package) {
+		p.Schemata[TypeIdent{Name: "VolatileTime", Package: pkg}] = apiext.JSONSchemaProps{
+			Type:   "string",
+			Format: "date-time",
+		}
+		p.AddPackage(pkg)
+	},
 }
 
 func boolPtr(b bool) *bool {
